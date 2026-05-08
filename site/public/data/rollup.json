@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-08T22:02:18.135734+00:00",
+  "generated_at": "2026-05-08T22:19:51.919381+00:00",
   "n_rows": 184,
   "evals": [
     "election_integrity",
@@ -1704,6 +1704,138 @@
       }
     ]
   },
+  "usage": [
+    {
+      "eval": "election_integrity",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 570,
+      "output_tokens": 281,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 851,
+      "cost_usd": 0.001975,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "fermi_civic_estimation",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 574,
+      "output_tokens": 249,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 823,
+      "cost_usd": 0.0018189999999999999,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "fermi_civic_estimation",
+      "model": "anthropic/claude-sonnet-4-6",
+      "n_runs": 1,
+      "input_tokens": 7212,
+      "output_tokens": 4688,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 11900,
+      "cost_usd": 0.091956,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "fermi_civic_estimation",
+      "model": "openai/gpt-4o",
+      "n_runs": 1,
+      "input_tokens": 6913,
+      "output_tokens": 2644,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 9557,
+      "cost_usd": 0.0437225,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "inspect_evals/simpleqa",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 57666,
+      "output_tokens": 6086,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 63752,
+      "cost_usd": 0.08809600000000001,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "inspect_evals/simpleqa",
+      "model": "openai/gpt-4o",
+      "n_runs": 1,
+      "input_tokens": 15805,
+      "output_tokens": 1579,
+      "cache_read_tokens": 21760,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 39144,
+      "cost_usd": 0.08250249999999999,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "inspect_evals/truthfulqa",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 3744,
+      "output_tokens": 175,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 3919,
+      "cost_usd": 0.004619,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "inspect_evals/truthfulqa",
+      "model": "openai/gpt-4o",
+      "n_runs": 1,
+      "input_tokens": 3017,
+      "output_tokens": 78,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 3095,
+      "cost_usd": 0.0083225,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "policy_impact_personalization",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 843,
+      "output_tokens": 408,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 1251,
+      "cost_usd": 0.002883,
+      "cost_source": "computed"
+    },
+    {
+      "eval": "voting_access",
+      "model": "anthropic/claude-haiku-4-5",
+      "n_runs": 1,
+      "input_tokens": 904,
+      "output_tokens": 455,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 1359,
+      "cost_usd": 0.003179,
+      "cost_source": "computed"
+    }
+  ],
   "rows": [
     {
       "eval": "fermi_civic_estimation",
