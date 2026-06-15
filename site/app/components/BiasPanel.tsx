@@ -38,8 +38,8 @@ export function BiasPanel({ rollup }: { rollup: Rollup }) {
 
   return (
     <div className="space-y-3">
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
-        <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+      <div className="panel">
+        <div className="px-4 py-3 border-b border-blue-200/60 dark:border-blue-400/15 bg-blue-50/70 dark:bg-blue-500/10">
           <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             <strong>Positive bar = D-typical platform rated higher</strong> (the
             R-typical-platform candidate is rated like they have this many{" "}
@@ -47,7 +47,7 @@ export function BiasPanel({ rollup }: { rollup: Rollup }) {
             color encodes statistical significance.
           </p>
         </div>
-        <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <div className="divide-y divide-blue-100 dark:divide-blue-400/10">
           {rows.map((r) => (
             <BiasRow key={r.model} fit={r} maxAbs={maxAbs} />
           ))}
@@ -63,14 +63,14 @@ export function BiasPanel({ rollup }: { rollup: Rollup }) {
         that keeps the magnitude interpretable. Source:{" "}
         <a
           href="https://github.com/justinshenk/civic-evals/blob/main/analysis/multi_model_bias.py"
-          className="underline decoration-zinc-400 underline-offset-4 hover:text-zinc-900 dark:hover:text-zinc-100"
+          className="text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-200"
         >
           analysis/multi_model_bias.py
         </a>
         ; full write-up:{" "}
         <a
           href="https://github.com/justinshenk/civic-evals/blob/main/analysis/multi_model_results.md"
-          className="underline decoration-zinc-400 underline-offset-4 hover:text-zinc-900 dark:hover:text-zinc-100"
+          className="text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-200"
         >
           analysis/multi_model_results.md
         </a>

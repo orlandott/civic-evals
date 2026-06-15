@@ -86,17 +86,17 @@ export default async function ModelPage({
         <nav className="text-sm">
           <Link
             href="/"
-            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-3"
+            className="font-medium text-blue-700 hover:text-blue-900 underline decoration-blue-300 underline-offset-3 dark:text-blue-300 dark:hover:text-blue-200"
           >
             ← all models
           </Link>
         </nav>
 
         <header className="space-y-3">
-          <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <p className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-blue-700 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300">
             CORDA · P3 · model report card
           </p>
-          <h1 className="font-mono text-3xl font-semibold tracking-tight break-all">
+          <h1 className="font-mono text-3xl font-semibold tracking-tight break-all ombre-text">
             {provider}
           </h1>
           <p className="max-w-3xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -163,12 +163,12 @@ export default async function ModelPage({
           />
         </section>
 
-        <footer className="pt-8 border-t border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400">
+        <footer className="pt-8 border-t border-blue-200/60 dark:border-blue-400/15 text-sm text-zinc-500 dark:text-zinc-400">
           <p>
             Aggregation source: every row in{" "}
             <Link
               href="https://github.com/justinshenk/civic-evals/blob/main/site/public/data/rollup.json"
-              className="underline decoration-zinc-400 underline-offset-4"
+              className="text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
             >
               rollup.json
             </Link>{" "}
@@ -197,23 +197,23 @@ function SummaryTable({
     );
   }
   return (
-    <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+    <div className="panel overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-50 dark:bg-zinc-900/40 text-left text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+        <thead className="bg-blue-50/80 dark:bg-blue-500/10 text-left text-xs uppercase tracking-wider text-blue-900 dark:text-blue-200">
           <tr>
             <th className="px-3 py-2 font-medium">{unit}</th>
             <th className="px-3 py-2 font-medium text-right">rows</th>
             <th className="px-3 py-2 font-medium text-right">mean</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <tbody className="divide-y divide-blue-100 dark:divide-blue-400/10">
           {rows.map((r) => (
-            <tr key={r.name} className="bg-white dark:bg-zinc-950">
+            <tr key={r.name} className="transition-colors hover:bg-blue-50/50 dark:hover:bg-blue-500/5">
               <td className="px-3 py-2 font-mono text-xs">
                 {linkPrefix ? (
                   <Link
                     href={`${linkPrefix}/${r.name}`}
-                    className="hover:underline decoration-zinc-400 underline-offset-4"
+                    className="text-blue-700 hover:underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
                   >
                     {r.name}
                   </Link>
@@ -246,11 +246,14 @@ function ScoreCell({ score }: { score: number | null }) {
 
 function SectionHeader({ title, hint }: { title: string; hint: string }) {
   return (
-    <header className="space-y-1">
-      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl">
-        {hint}
-      </p>
+    <header className="flex gap-3">
+      <span aria-hidden className="ombre-rule mt-1 w-1 shrink-0 rounded-full" />
+      <div className="space-y-1">
+        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl leading-relaxed">
+          {hint}
+        </p>
+      </div>
     </header>
   );
 }

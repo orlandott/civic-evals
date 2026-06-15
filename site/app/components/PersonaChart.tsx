@@ -27,7 +27,9 @@ export function PersonaChart({ rollup }: Props) {
     return row;
   });
 
-  const palette = ["#2563eb", "#16a34a", "#ea580c", "#9333ea", "#dc2626"];
+  // Cool, blue-anchored palette so the chart sits inside the ombre theme
+  // while keeping up to five evals visually distinct.
+  const palette = ["#1d4ed8", "#38bdf8", "#6366f1", "#0891b2", "#7c3aed"];
 
   return (
     <div className="space-y-3">
@@ -35,7 +37,7 @@ export function PersonaChart({ rollup }: Props) {
       {rubricRows.length === 0 ? (
         <p className="text-sm text-zinc-500 dark:text-zinc-400">No rubric_judge rows for this provider.</p>
       ) : (
-        <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
+        <div className="panel p-4">
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 12, right: 16, bottom: 12, left: 0 }}>
