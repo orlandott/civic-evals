@@ -47,9 +47,11 @@ export function SubScorePanel({ rollup }: { rollup: Rollup }) {
               {perEval.map((pe) => (
                 <li
                   key={pe.eval}
-                  className="flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-400"
+                  className="flex items-center justify-between gap-3 text-sm text-zinc-600 dark:text-zinc-400"
                 >
-                  <span className="font-mono text-xs">{pe.eval}</span>
+                  <span className="min-w-0 truncate font-mono text-xs" title={pe.eval}>
+                    {pe.eval}
+                  </span>
                   <Bar value={pe.mean} />
                 </li>
               ))}
@@ -69,7 +71,7 @@ function Bar({ value }: { value: number | null }) {
   }
   const pct = Math.max(0, Math.min(1, value)) * 100;
   return (
-    <span className="flex items-center gap-2">
+    <span className="flex shrink-0 items-center gap-2">
       <span className="h-1.5 w-24 rounded-full bg-blue-100 dark:bg-blue-500/15 overflow-hidden">
         <span
           className="ombre-fill-h block h-full rounded-full"
