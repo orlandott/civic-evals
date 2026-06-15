@@ -1,6 +1,50 @@
 import Link from "next/link";
 import { fmt, groupBy, meanBy, type Rollup, type EvalMeta } from "@/lib/rollup";
 
+/**
+ * Plain-language title + summary per eval, for a non-technical reader.
+ *
+ * Faithful condensations of each eval's own `description` (see
+ * rollup.json `evals_meta`) — they simplify wording, they don't add
+ * claims. The card shows this version; the original technical
+ * description is preserved inside the "Show test details" disclosure.
+ * Evals without an entry fall back to their raw name + description, so a
+ * newly-added eval still renders (just less friendly) until someone
+ * writes its plain summary here.
+ */
+const PLAIN: Record<string, { title: string; summary: string }> = {
+  voting_access: {
+    title: "Voting access",
+    summary:
+      "Everyday facts about voting in the U.S.: how to register, what ID you need, where and when to vote, and how to get on the ballot.",
+  },
+  election_integrity: {
+    title: "Election integrity",
+    summary:
+      "Whether a model handles claims about U.S. elections correctly — debunking known falsehoods, confirming true procedures without needless hedging, and pointing people to official state sources when the answer depends on where they live.",
+  },
+  fermi_civic_estimation: {
+    title: "Estimating numbers",
+    summary:
+      "Asks the model for a number and how sure it is. Some answers are exact (there are 100 U.S. Senators); others need a ballpark (the U.S. population, total votes cast in 2020). Tests whether its confidence matches how well it actually knows.",
+  },
+  policy_impact_personalization: {
+    title: "“How does this affect me?”",
+    summary:
+      "Asks how a policy would affect the person asking — posed as different kinds of people, where the right answer genuinely depends on who is asking.",
+  },
+  openendedness_ladder: {
+    title: "Clear vs. open-ended questions",
+    summary:
+      "Questions that range from a single clear answer to wide-open and interpretive, checking how much the model's answers start to vary as the questions get fuzzier.",
+  },
+  persona_drift_pilot: {
+    title: "Holding a position under pressure",
+    summary:
+      "Whether a model's stance on election-policy questions shifts based on who's asking, whether the user pushes back, or whether a false claim was planted earlier in the conversation.",
+  },
+};
+
 export function EvalCards({ rollup }: { rollup: Rollup }) {
   const byEval = groupBy(rollup.rows, (r) => r.eval);
 
@@ -24,18 +68,24 @@ export function EvalCards({ rollup }: { rollup: Rollup }) {
 function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
   const overall = meanBy(rows, (r) => r.score);
   const totalDiff = Object.values(meta.difficulty).reduce((a, b) => a + b, 0) || 1;
+  const plain = PLAIN[meta.name];
+  const title = plain?.title ?? meta.name;
+  const summary = plain?.summary ?? meta.description ?? "No description provided.";
 
   return (
     <article className="card p-5 flex flex-col gap-3">
-      <header className="flex items-baseline justify-between gap-3">
-        <h3 className="font-mono text-sm font-medium tracking-tight">
-          <Link
-            href={`/evals/${meta.name}`}
-            className="text-blue-700 hover:underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
-          >
-            {meta.name}
-          </Link>
-        </h3>
+      <header className="flex items-start justify-between gap-3">
+        <div className="space-y-0.5">
+          <h3 className="text-base font-semibold tracking-tight leading-snug">
+            <Link
+              href={`/evals/${meta.name}`}
+              className="text-blue-700 hover:underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
+            >
+              {title}
+            </Link>
+          </h3>
+          <p className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500">{meta.name}</p>
+        </div>
         <span
           className="shrink-0 rounded-full bg-blue-50 px-2 py-0.5 font-mono text-xs tabular-nums text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"
           title="Average score across every grading method and run (0–1, higher is better)"
@@ -45,7 +95,7 @@ function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
       </header>
 
       <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-        {meta.description || "No description provided."}
+        {summary}
       </p>
 
       <details className="group text-xs">
@@ -56,6 +106,15 @@ function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
           Show test details
         </summary>
         <div className="mt-3 space-y-3">
+          {plain && meta.description && (
+            <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              <span className="font-medium text-zinc-600 dark:text-zinc-300">
+                Full description:{" "}
+              </span>
+              {meta.description}
+            </p>
+          )}
+
           <dl className="grid grid-cols-2 gap-x-4 gap-y-2">
             <div>
               <dt className="text-zinc-400 dark:text-zinc-500">Questions</dt>
