@@ -39,17 +39,17 @@ export default async function EvalPage({ params }: { params: Promise<{ name: str
         <nav className="text-sm">
           <Link
             href="/"
-            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-3"
+            className="font-medium text-blue-700 hover:text-blue-900 underline decoration-blue-300 underline-offset-3 dark:text-blue-300 dark:hover:text-blue-200"
           >
             ← all evals
           </Link>
         </nav>
 
         <header className="space-y-3">
-          <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <p className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-blue-700 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300">
             CORDA · P3 · eval
           </p>
-          <h1 className="font-mono text-3xl font-semibold tracking-tight">{meta.name}</h1>
+          <h1 className="font-mono text-3xl font-semibold tracking-tight ombre-text">{meta.name}</h1>
           <p className="max-w-3xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
             {meta.description || "No description provided."}
           </p>
@@ -67,7 +67,7 @@ export default async function EvalPage({ params }: { params: Promise<{ name: str
             </span>
             <a
               href={meta.readme_url}
-              className="underline decoration-zinc-400 underline-offset-4 hover:text-zinc-900 dark:hover:text-zinc-100"
+              className="font-medium text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-200"
             >
               README →
             </a>
@@ -117,12 +117,12 @@ export default async function EvalPage({ params }: { params: Promise<{ name: str
           />
         </section>
 
-        <footer className="pt-8 border-t border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400">
+        <footer className="pt-8 border-t border-blue-200/60 dark:border-blue-400/15 text-sm text-zinc-500 dark:text-zinc-400">
           <p>
             Source:{" "}
             <a
               href={`https://github.com/justinshenk/civic-evals/tree/main/evals/${meta.name}`}
-              className="underline decoration-zinc-400 underline-offset-4"
+              className="text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
             >
               evals/{meta.name}/
             </a>
@@ -151,9 +151,9 @@ function TaskTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+    <div className="panel overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-50 dark:bg-zinc-900/50 text-left text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        <thead className="bg-blue-50/80 dark:bg-blue-500/10 text-left text-xs uppercase tracking-wide text-blue-900 dark:text-blue-200">
           <tr>
             <th className="px-3 py-2 font-medium">Task</th>
             <th className="px-3 py-2 font-medium">Question</th>
@@ -432,11 +432,14 @@ function CompletionBlock({
 
 function SectionHeader({ title, hint }: { title: string; hint?: string }) {
   return (
-    <div className="space-y-1">
-      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      {hint && (
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl">{hint}</p>
-      )}
+    <div className="flex gap-3">
+      <span aria-hidden className="ombre-rule mt-1 w-1 shrink-0 rounded-full" />
+      <div className="space-y-1">
+        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+        {hint && (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl leading-relaxed">{hint}</p>
+        )}
+      </div>
     </div>
   );
 }

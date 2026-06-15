@@ -26,18 +26,18 @@ function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
   const totalDiff = Object.values(meta.difficulty).reduce((a, b) => a + b, 0) || 1;
 
   return (
-    <article className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 flex flex-col gap-3 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+    <article className="card p-5 flex flex-col gap-3">
       <header className="flex items-baseline justify-between gap-3">
         <h3 className="font-mono text-sm font-medium tracking-tight">
           <Link
             href={`/evals/${meta.name}`}
-            className="hover:underline decoration-zinc-400 underline-offset-4"
+            className="text-blue-700 hover:underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
           >
             {meta.name}
           </Link>
         </h3>
         <span
-          className="font-mono text-xs tabular-nums text-zinc-500 dark:text-zinc-400"
+          className="rounded-full bg-blue-50 px-2 py-0.5 font-mono text-xs tabular-nums text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"
           title="mean of all scorers, all rows"
         >
           {overall === null ? "no runs yet" : `mean ${fmt(overall)}`}
@@ -65,7 +65,7 @@ function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
         {meta.subdomains.slice(0, 6).map((s) => (
           <span
             key={s}
-            className="inline-flex items-center rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-600 dark:text-zinc-300"
+            className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-mono text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"
           >
             {s}
           </span>
@@ -81,7 +81,7 @@ function EvalCard({ meta, rows }: { meta: EvalMeta; rows: Rollup["rows"] }) {
         <ScorerBadges kinds={meta.scorer_kinds} />
         <Link
           href={`/evals/${meta.name}`}
-          className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-3"
+          className="font-medium text-blue-700 hover:text-blue-900 underline decoration-blue-300 underline-offset-3 dark:text-blue-300 dark:hover:text-blue-200"
         >
           tasks →
         </Link>
@@ -129,7 +129,7 @@ function ScorerBadges({ kinds }: { kinds: string[] }) {
       {kinds.map((k) => (
         <span
           key={k}
-          className="inline-flex items-center rounded border border-zinc-200 dark:border-zinc-700 px-1.5 py-0.5 text-[10px] font-mono text-zinc-600 dark:text-zinc-400"
+          className="inline-flex items-center rounded-full border border-blue-200 dark:border-blue-400/25 px-2 py-0.5 text-[10px] font-mono text-blue-700 dark:text-blue-300"
           title={k === "rubric" ? "scored by LLM judge with rubric" : "scored by ground-truth match"}
         >
           {k}

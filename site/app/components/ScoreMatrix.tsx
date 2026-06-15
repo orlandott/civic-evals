@@ -26,9 +26,9 @@ export function ScoreMatrix({ rollup }: { rollup: Rollup }) {
   return (
     <div className="space-y-3">
       <ProviderSelect provider={provider} providers={providers} onChange={setProvider} />
-      <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="panel overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
+        <thead className="bg-blue-50/80 dark:bg-blue-500/10 text-blue-900 dark:text-blue-200">
           <tr>
             <th className="text-left font-medium px-4 py-3">Eval</th>
             {scorersSorted.map((s) => (
@@ -38,12 +38,12 @@ export function ScoreMatrix({ rollup }: { rollup: Rollup }) {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <tbody className="divide-y divide-blue-100 dark:divide-blue-400/10">
           {evalsSorted.map((e) => {
             const rows = byEval[e] ?? [];
             const byScorer = groupBy(rows, (r) => r.scorer);
             return (
-              <tr key={e}>
+              <tr key={e} className="transition-colors hover:bg-blue-50/50 dark:hover:bg-blue-500/5">
                 <td className="px-4 py-3 font-mono text-sm">{e}</td>
                 {scorersSorted.map((s) => {
                   const cell = byScorer[s] ?? [];

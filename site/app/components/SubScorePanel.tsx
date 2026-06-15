@@ -36,13 +36,12 @@ export function SubScorePanel({ rollup }: { rollup: Rollup }) {
           ),
         }));
         return (
-          <div
-            key={dim.key}
-            className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 space-y-3"
-          >
+          <div key={dim.key} className="card p-5 space-y-3">
             <div className="flex items-baseline justify-between">
               <h3 className="font-medium">{dim.label}</h3>
-              <span className="font-mono text-lg tabular-nums">{fmt(overall)}</span>
+              <span className="ombre-text font-mono text-lg font-semibold tabular-nums">
+                {fmt(overall)}
+              </span>
             </div>
             <ul className="space-y-1.5">
               {perEval.map((pe) => (
@@ -71,9 +70,9 @@ function Bar({ value }: { value: number | null }) {
   const pct = Math.max(0, Math.min(1, value)) * 100;
   return (
     <span className="flex items-center gap-2">
-      <span className="h-1.5 w-24 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+      <span className="h-1.5 w-24 rounded-full bg-blue-100 dark:bg-blue-500/15 overflow-hidden">
         <span
-          className="block h-full bg-emerald-500"
+          className="ombre-fill-h block h-full rounded-full"
           style={{ width: `${pct}%` }}
         />
       </span>

@@ -19,44 +19,62 @@ export default function Home() {
       }) + " UTC"
     : "never";
 
+  const stats = [
+    { label: "rows", value: rollup.n_rows },
+    { label: "evals", value: rollup.evals.length },
+    { label: "providers", value: rollup.providers.length },
+    { label: "scorers", value: rollup.scorers.length },
+  ];
+
   return (
     <main className="flex-1 w-full">
-      <div className="mx-auto max-w-6xl px-6 py-12 space-y-12">
-        <header className="space-y-3">
-          <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+      <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16 space-y-14">
+        <header className="relative isolate space-y-5">
+          {/* decorative ombre wash behind the hero */}
+          <div
+            aria-hidden
+            className="brand-blob pointer-events-none absolute -top-24 right-0 -z-10 h-72 w-72 rounded-full sm:h-96 sm:w-96"
+          />
+          <p className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-blue-700 dark:border-blue-400/20 dark:bg-blue-500/10 dark:text-blue-300">
             CORDA · P3 · Civic Information Reliability
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight">
-            How reliably do LLMs answer civic questions?
+          <h1 className="max-w-4xl text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.08]">
+            How reliably do LLMs answer{" "}
+            <span className="ombre-text">civic questions?</span>
           </h1>
-          <p className="max-w-3xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <p className="max-w-3xl text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
             An open evaluation suite measuring LLM reliability on voting access, election
             integrity, and persona-conditioned policy reasoning. Each eval runs against the same
             rubrics, scored for factual accuracy, calibrated uncertainty, and appropriate refusal.
           </p>
-          <div className="flex flex-wrap gap-6 pt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{rollup.n_rows}</strong> rows
-            </span>
-            <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{rollup.evals.length}</strong>{" "}
-              evals
-            </span>
-            <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{rollup.providers.length}</strong>{" "}
-              providers
-            </span>
-            <span>
-              <strong className="text-zinc-900 dark:text-zinc-100">{rollup.scorers.length}</strong>{" "}
-              scorers
-            </span>
+
+          <div className="grid grid-cols-2 gap-3 pt-2 sm:max-w-2xl sm:grid-cols-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="card flex flex-col gap-0.5 px-4 py-3"
+              >
+                <span className="ombre-text text-2xl font-semibold tabular-nums">
+                  {s.value}
+                </span>
+                <span className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-sm text-zinc-500 dark:text-zinc-400">
             <span>
               updated{" "}
-              <strong className="text-zinc-900 dark:text-zinc-100">{generatedAt}</strong>
+              <strong className="font-medium text-zinc-800 dark:text-zinc-200">{generatedAt}</strong>
+            </span>
+            <span aria-hidden className="text-blue-300 dark:text-blue-700">
+              •
             </span>
             <a
               href="https://github.com/justinshenk/civic-evals"
-              className="underline decoration-zinc-400 underline-offset-4 hover:text-zinc-900 dark:hover:text-zinc-100"
+              className="font-medium text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-200"
             >
               source on GitHub →
             </a>
@@ -137,26 +155,26 @@ export default function Home() {
           </>
         )}
 
-        <footer className="pt-8 border-t border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400">
+        <footer className="pt-8 border-t border-blue-200/60 dark:border-blue-400/15 text-sm text-zinc-500 dark:text-zinc-400">
           <p>
             Built on{" "}
             <a
               href="https://inspect.aisi.org.uk/"
-              className="underline decoration-zinc-400 underline-offset-4"
+              className="text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
             >
               inspect-ai
             </a>
             . Source:{" "}
             <a
               href="https://github.com/justinshenk/civic-evals"
-              className="underline decoration-zinc-400 underline-offset-4"
+              className="text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
             >
               justinshenk/civic-evals
             </a>
             . Contributions welcome — see{" "}
             <a
               href="https://github.com/justinshenk/civic-evals/blob/main/CONTRIBUTING.md"
-              className="underline decoration-zinc-400 underline-offset-4"
+              className="text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300"
             >
               CONTRIBUTING.md
             </a>
@@ -170,16 +188,19 @@ export default function Home() {
 
 function SectionHeader({ title, hint }: { title: string; hint: string }) {
   return (
-    <div className="space-y-1">
-      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl">{hint}</p>
+    <div className="flex gap-3">
+      <span aria-hidden className="ombre-rule mt-1 w-1 shrink-0 rounded-full" />
+      <div className="space-y-1">
+        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl leading-relaxed">{hint}</p>
+      </div>
     </div>
   );
 }
 
 function EmptyState() {
   return (
-    <div className="rounded-lg border border-dashed border-zinc-300 dark:border-zinc-700 p-10 text-center">
+    <div className="panel border-dashed p-10 text-center">
       <p className="text-zinc-700 dark:text-zinc-300 font-medium">No results yet.</p>
       <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto">
         Run an eval, then regenerate the rollup:
