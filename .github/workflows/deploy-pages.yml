@@ -32,6 +32,13 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v4
+      # Enable Pages (Source = "GitHub Actions") via the API if it isn't
+      # already. Without this, actions/deploy-pages fails the first run with
+      # "HttpError: Not Found ... Ensure GitHub Pages has been enabled".
+      # `enablement: true` is idempotent — a no-op once Pages is on.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: pnpm/action-setup@v4
         with:
           version: 9
