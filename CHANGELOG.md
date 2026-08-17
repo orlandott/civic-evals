@@ -7,6 +7,17 @@ not a public API).
 
 ## [Unreleased]
 
+### Changed
+- **Lint cleanup across `analysis/`** so `ruff check .` passes repo-wide — the
+  job had been red on `main`, which made every PR's CI red for reasons
+  unrelated to its diff. Unused imports and dead locals removed, import blocks
+  sorted, two placeholder-free f-strings and one one-line `if` reformatted, and
+  the five bare `zip()` calls given an explicit `strict=False`. No behavior
+  changes: `strict=False` preserves today's semantics rather than raising on a
+  length mismatch, and the reordered imports keep the `cbe.render` monkey-patch
+  layering (`persona_bias_pilot` → `persona_l0_mitigation` →
+  `persona_l0_placement`) in the same order.
+
 ### Removed
 - **`refresh-results` GitHub Action** (`.github/workflows/refresh-results.yml`).
   The weekly/manual suite run, cost gate, rollup commit, and Slack notify are
