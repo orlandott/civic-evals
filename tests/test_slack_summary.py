@@ -1,9 +1,9 @@
 """Slack summary generator: numeric correctness and shape.
 
-The summary script is a small but load-bearing reporter — every weekly
-cron posts its output to a public Slack channel, so silent breakage
-(fields renamed, deltas miscomputed, missing-prior path crashing) is
-high-cost. These tests exercise:
+The summary script is a small but load-bearing reporter — its output is
+what gets pasted into a PR body or a Slack channel after a refresh run, so
+silent breakage (fields renamed, deltas miscomputed, missing-prior path
+crashing) is high-cost. These tests exercise:
 
 - per-(eval, provider) mean computation
 - delta arrow + magnitude

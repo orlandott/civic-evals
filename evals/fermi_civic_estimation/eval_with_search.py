@@ -18,7 +18,7 @@ post-cutoff quantities (fc-017 through fc-020). Those rows now score
 intervention isn't retraining; it's giving the model search access.
 This variant measures the lift.
 
-Run opt-in (not part of the weekly refresh-results workflow)::
+Run opt-in (``just eval-all`` skips the with-search variants)::
 
     uv run inspect eval evals/fermi_civic_estimation/eval_with_search.py \\
         --model openai/gpt-4o
