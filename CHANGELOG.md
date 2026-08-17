@@ -7,6 +7,17 @@ not a public API).
 
 ## [Unreleased]
 
+### Removed
+- **`refresh-results` GitHub Action** (`.github/workflows/refresh-results.yml`).
+  The weekly/manual suite run, cost gate, rollup commit, and Slack notify are
+  gone; regenerating `site/public/data/rollup.json` is now a local step
+  (`just eval-all` → `just rollup` → commit). `deploy-pages` still publishes on
+  any push to `main` touching `site/**`, so committing a fresh rollup
+  republishes the site as before. `analysis/rollup.py`, `analysis/usage.py`, and
+  `analysis/slack_summary.py` are unchanged and still reachable via `just
+  rollup` / `just usage` / `just slack`. The `SLACK_WEBHOOK_URL` and
+  `OPENAI_API_KEY` repo secrets are no longer read by any workflow.
+
 ### Fixed
 - **Schema**: tasks setting both `target` and `rubric` are now rejected at load
   time. The loader writes `target` into `Sample.target` and `rubric` into

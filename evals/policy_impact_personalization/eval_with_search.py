@@ -10,7 +10,7 @@ Same dataset as ``eval.py``; differs only in:
 
 Logged under a distinct task name (``policy_impact_personalization_with_search``)
 so the rollup naturally separates it from the zero-shot baseline. Run
-this opt-in — it's not part of the weekly refresh-results workflow:
+this opt-in — ``just eval-all`` skips the with-search variants:
 
     uv run inspect eval evals/policy_impact_personalization/eval_with_search.py \\
         --model anthropic/claude-haiku-4-5
